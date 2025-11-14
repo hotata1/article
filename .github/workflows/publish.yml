@@ -3,7 +3,7 @@ name: Publish to Qiita
 on:
   push:
     branches:
-      - master # 記事を管理しているブランチ名に変更してください
+      - master # ① あなたのブランチ名に合わせて修正（master または main）
 
 jobs:
   publish:
@@ -18,9 +18,11 @@ jobs:
           node-version: '20'
 
       - name: Install Qiita CLI
-        run: npm install -g qiita
+        # ② ローカルにインストールし、npxで実行するように変更
+        run: npm install qiita 
 
       - name: Publish to Qiita
         env:
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }} 
-        run: qiita publish --all
+        # ③ npxを使って実行ファイルを呼び出す
+        run: npx qiita publish --all
