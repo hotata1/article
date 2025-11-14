@@ -3,7 +3,7 @@ name: Publish to Qiita
 on:
   push:
     branches:
-      - master # ① あなたのブランチ名に合わせて修正（master または main）
+      - master # ★ あなたのブランチ名に合わせて修正（master または main）
 
 jobs:
   publish:
@@ -11,18 +11,33 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        # 【追加】チェックアウト時のGit設定（エンコーディング問題回避のため）
+        with:
+          lfs: true 
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+          
+      - name: Setup Git for LF/CRLF and encoding
+        # 【追加】改行コードやファイル名エンコーディングの問題を解決
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.quotepath false
+          git config --global core.editor "vim"
+          git config --global core.ignorecase false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20' # 安定版のNode.jsバージョン
 
       - name: Install Qiita CLI
-        # ② ローカルにインストールし、npxで実行するように変更
+        # ローカルインストール (npxを使うため)
         run: npm install qiita 
 
       - name: Publish to Qiita
         env:
+          # GitHub Secretsに登録したアクセストークン名
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }} 
-        # ③ npxを使って実行ファイルを呼び出す
+        # npxを使って実行ファイルを呼び出す
         run: npx qiita publish --all
