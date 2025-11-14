@@ -2,7 +2,7 @@
 title: "【全機種対応！】AWS EC2で始めるJava/Bedrock/Switch クロスプレイMinecraftサーバー構築術"
 tags: ["AWS", "EC2", "minecraft","NintendoSwitch","Java"]
 id: 
-private: false # trueにすると限定公開
+private: true # trueにすると限定公開
 updated_at: 
 created_at: 
 ---
