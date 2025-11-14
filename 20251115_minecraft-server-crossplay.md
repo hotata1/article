@@ -120,4 +120,4 @@ Linuxの標準機能である**Systemd**を使ってサーバーをサービス�
 
 * **t3.medium** インスタンスと、**25565/TCP + 19132/UDP** のポート開放が、全てのプラットフォーム対応のサーバー基盤となります。
 * PaperMCと **Geyser/Floodgate/ViaVersion** の組み合わせが、全機種からのマルチプレイを実現します。
-* 実際はこの基盤に、[**LINE Botによる自動起動**](https://qiita.com/hota/items/e5031cd8127e319b0ee2)を導入し、使いやすくしています。
+* 実際はこの基盤に、[**LINE Botによる自動起動**](https://qiita.com/hota/items/e5031cd8127e319b0ee2)を導入し、使いやすくしています。 
