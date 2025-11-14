@@ -18,7 +18,16 @@ jobs:
           submodules: true
           persist-credentials: false
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
+        
+      - name: Setup Git Authentication for File Write
+        # 【💡 追加】ローカルファイル書き込み用の認証をセットアップ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com" | git credential approve
+
+      
       - name: Setup Git for LF/CRLF and encoding
         # 改行コードやファイル名エンコーディングの問題を解決
         run: |
