@@ -17,6 +17,7 @@ jobs:
           fetch-depth: 0
           submodules: true
           persist-credentials: false
+          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Setup Git for LF/CRLF and encoding
         # 改行コードやファイル名エンコーディングの問題を解決
