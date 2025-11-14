@@ -3,7 +3,7 @@ name: Publish to Qiita
 on:
   push:
     branches:
-      - main # 記事を管理しているブランチ名に変更してください
+      - master # 記事を管理しているブランチ名に変更してください
 
 jobs:
   publish:
