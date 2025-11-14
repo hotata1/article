@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        # 【追加】チェックアウト時のGit設定（エンコーディング問題回避のため）
+        # エンコーディングの問題回避のため、Git設定を追加
         with:
           lfs: true 
           fetch-depth: 0
@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
           
       - name: Setup Git for LF/CRLF and encoding
-        # 【追加】改行コードやファイル名エンコーディングの問題を解決
+        # 改行コードやファイル名エンコーディングの問題を解決
         run: |
           git config --global core.autocrlf false
           git config --global core.quotepath false
@@ -32,12 +32,12 @@ jobs:
           node-version: '20' # 安定版のNode.jsバージョン
 
       - name: Install Qiita CLI
-        # ローカルインストール (npxを使うため)
+        # 【修正なし】ローカルインストール
         run: npm install qiita 
 
       - name: Publish to Qiita
         env:
           # GitHub Secretsに登録したアクセストークン名
           QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }} 
-        # npxを使って実行ファイルを呼び出す
-        run: npx qiita publish --all
+        # 【💡 最終修正】ローカルパスにある実行ファイルを node で直接呼び出す
+        run: node ./node_modules/qiita/lib/qiita.js publish --all
